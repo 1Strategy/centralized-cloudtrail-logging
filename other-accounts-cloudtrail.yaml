@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Turns on CloudTrail and and sends logs to the logs account.
+
+Parameters:
+  CloudTrailBucketName:
+    Description: 'The S3 bucket that will be storing CloudTrail logs from this account and from others.'
+    Type: String
+    Default: "[organization]-cloudtrail-logs"
+  KMSKeyArn:
+    Description: The KMS key ARN in the centralized logging account to be used to encrypt CloudTrail Logs.
+    Type: String
+    Default: arn:aws:kms:us-west-2:111111111111:key/some-key-guid
+  CloudTrailLogName:
+    Description: 'Name given to the CloudTrail logs configuration'
+    Type: String
+    Default: "[organization]-cloudtrail"
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: KMS & Bucket Setup
+        Parameters:
+          - CloudTrailBucketName
+          - CloudTrailLogName
+          - KMSKeyArn
+    ParameterLabels:
+      CloudTrailBucketName:
+        default: CloudTrail Bucket Name
+      CloudTrailLogName:
+        default: CloudTrail Log Name
+      KMSKeyArn:
+        default: KMS Key ARN
+
+Resources:
+  LogsAccountCloudTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      EnableLogFileValidation: true
+      IncludeGlobalServiceEvents: true
+      IsLogging: true
+      IsMultiRegionTrail: true
+      S3BucketName: !Ref 'CloudTrailBucketName'
+      KMSKeyId: !Ref 'KMSKeyArn'
+      TrailName: !Ref CloudTrailLogName
