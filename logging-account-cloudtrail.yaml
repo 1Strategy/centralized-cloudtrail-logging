@@ -331,7 +331,7 @@ Resources:
       EventSelectors: 
         - ReadWriteType: !Ref ReadWriteType
       S3BucketName: !Ref CloudTrailBucketName
-      KMSKeyId: !If [ ShouldEncryptLogs, !Ref CloudTrailEncryptionKey, !Ref "AWS::NoValue" ] 
+      KMSKeyId: !If [ ShouldEncryptLogs, !GetAtt CloudTrailEncryptionKey.Arn, !Ref "AWS::NoValue" ] 
       TrailName: !Ref CloudTrailLogName
 Outputs:
   CloudTrailEncryptionKeyArn:
