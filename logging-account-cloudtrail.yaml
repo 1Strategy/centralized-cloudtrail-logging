@@ -5,7 +5,7 @@ Parameters:
   CloudTrailBucketName:
     Description: 'The S3 bucket that will be storing CloudTrail logs from this account and from others.'
     Type: String
-    Default: "[organization]-cloudtrail-logs"
+    Default: "organization-cloudtrail-logs"
   EncryptLogs:
     Description: Indicates whether the logs stored in the S3 bucket should be encrypted or not.
     Type: String
@@ -28,7 +28,7 @@ Parameters:
   CloudTrailLogName:
     Description: 'Name given to the CloudTrail logs configuration'
     Type: String
-    Default: "[organization]-cloudtrail"
+    Default: "organization-cloudtrail"
   MultiRegion:
     Description: Indicates whether the CloudTrail trail is created in the region in which you create the stack (false) or in all regions (true).
     Type: String
