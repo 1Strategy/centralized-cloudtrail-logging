@@ -210,10 +210,13 @@ Conditions:
 Resources:
   CloudTrailBucket:
     Type: AWS::S3::Bucket
+    Condition: LocalCloudTrail
     Properties:
       BucketName: !Ref 'CloudTrailBucketName'
+  
   CloudTrailBucketPolicy:
     Type: AWS::S3::BucketPolicy
+    Condition: LocalCloudTrail
     DependsOn: CloudTrailBucket
     Properties:
       Bucket: !Ref 'CloudTrailBucketName'
