@@ -339,7 +339,8 @@ Resources:
 Outputs:
   CloudTrailEncryptionKeyArn:
     Description: CloudTrail Encryption Key ARN
-    Value: !If [ ShouldEncryptLogs, !GetAtt 'CloudTrailEncryptionKey.Arn', "N/A" ]
+    Value: !GetAtt CloudTrailEncryptionKey.Arn
+    Condition: ShouldEncryptLogs
   CloudTrailBucket:
     Description: CloudTrail Bucket Name
     Value: !Ref 'CloudTrailBucket'
