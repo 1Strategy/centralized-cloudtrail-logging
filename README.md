@@ -22,8 +22,8 @@ The steps below are for the console, but could easily be replicated via the AWS 
 5. Deploy the Stack
 6. Note the outputs for the KMS key ARN and S3 bucket name
 
-#### Non-Logging Accounts
-1. If you haven't done so yet, follow the instructions above to deploy the cetralized logging stack in your Security/Logging AWS account.
+#### Resource Accounts
+1. If you haven't done so yet, follow the instructions above to deploy the centralized logging stack in your Security/Logging AWS account.
 2. Login to the AWS Account you want to have log to the centralized bucket.
 3. Create a New Stack in the CloudFormation console.
 4. Upload the `other-accounts-cloudtrail.yaml` file as the template.
